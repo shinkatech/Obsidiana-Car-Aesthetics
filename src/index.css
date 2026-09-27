@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root { color-scheme: dark; }
+  html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+  body {
+    @apply bg-asphalt text-chrome font-sans antialiased;
+    overflow-x: hidden;
+  }
+  h1, h2, h3 { text-wrap: balance; }
+  ::selection { background: #8FDBFF; color: #090C11; }
+  :focus-visible { outline: 2px solid #8FDBFF; outline-offset: 3px; border-radius: 6px; }
+}
+
+@layer components {
+  .shell { @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8; }
+  .eyebrow { @apply font-mono text-[11px] uppercase tracking-[0.22em] text-led; }
+  .h-section { @apply font-display font-extrabold uppercase leading-[0.9] tracking-tight text-5xl sm:text-6xl lg:text-7xl; }
+  .btn-led {
+    @apply relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-led px-6 py-3.5
+      font-semibold text-asphalt transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0;
+    box-shadow: 0 0 0 1px rgba(143,219,255,.4), 0 10px 40px -10px rgba(143,219,255,.7);
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-steel px-6 py-3.5 font-semibold
+      text-chrome transition-colors hover:border-led/60 hover:text-led;
+  }
+  .hairline { background: linear-gradient(90deg, transparent, rgba(143,219,255,.35), transparent); height: 1px; }
+}
+
+@keyframes chrome { 0%, 100% { background-position: 100% 0; } 50% { background-position: 0% 0; } }
+
+/* textura sutil de piso do box */
+.floor-grid {
+  background-image:
+    linear-gradient(rgba(143,219,255,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(143,219,255,.05) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+/* flip dos cards */
+.flip-scene { perspective: 1200px; }
+.flip-inner { transform-style: preserve-3d; transition: transform .8s cubic-bezier(.2,.8,.2,1); }
+.flip-inner.is-flipped { transform: rotateY(180deg); }
+.flip-face { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.flip-back { transform: rotateY(180deg); }
+
+/* range do antes/depois ocupa a área inteira, invisível */
+.ba-range { -webkit-appearance: none; appearance: none; background: transparent; }
+.ba-range::-webkit-slider-thumb { -webkit-appearance: none; width: 48px; height: 400px; cursor: ew-resize; background: transparent; }
+.ba-range::-moz-range-thumb { width: 48px; height: 400px; border: 0; cursor: ew-resize; background: transparent; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+}
